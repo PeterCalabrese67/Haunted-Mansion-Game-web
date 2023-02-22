@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Haunted Mansion Game</title>
+  <style>
+    #output {
+      height: 300px;
+      width: 100%;
+      background-color: black;
+      color: white;
+      font-family: monospace;
+      overflow-y: scroll;
+      padding: 10px;
+    }
+
+    #input {
+      width: 100%;
+      font-size: 16px;
+      padding: 10px;
+      box-sizing: border-box;
+      border:0cqb;
+      background-color: aqua;
+    }
+
+    #input:focus {
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="output"></div>
+  <input id="input" type="text">
+  <script>
+    const output = document.getElementById("output");
+    const input = document.getElementById("input");
+
+    function print(text) {
+      output.innerHTML += text + "<br>";
+      output.scrollTop = output.scrollHeight;
+    }
+
+    function clear() {
+      output.innerHTML = "";
+    }
+
+    function getCommand() {
+      return input.value.trim();
+    }
+
+    function clearCommand() {
+      input.value = "";
+    }
+
+    // Main game code goes here
+
+  </script>
+</body>
+</html>
