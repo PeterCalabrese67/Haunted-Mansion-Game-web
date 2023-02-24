@@ -1,3 +1,5 @@
+
+/*
 const rooms = {
     foyer: {
       description: "You are standing in the foyer of the Haunted Mansion. The room is dimly lit and full of cobwebs. A grand staircase leads up to the second floor, and a hallway leads to the north.",
@@ -20,17 +22,11 @@ const rooms = {
       exits: {
         south: "hallway"
       }
-    }
+    },
+   
   };
+*/
 
-  // Define the game's characters
-const characters = [
-    { id: 0, name: "poltergeist", description: "A mischievous poltergeist.", room: 2 },
-    { id: 1, name: "bride", description: "A ghostly bride.", room: 9 },
-    { id: 2, name: "caretaker", description: "A grumpy caretaker.", room: 3 },
-    { id: 3, name: "ghost", description: "A friendly but forgetful ghost.", room: 5 }
-  ];
-  
   // Define the objects
 const objects = {
     candlestick: {
@@ -53,10 +49,17 @@ const objects = {
   
   // Show the current room
 
+
+
   function describeRoom(room) {
     //console.log(rooms[room].name);
     if (room){
     print(rooms[room].description);
+
+    rooms[room].characters.forEach ((ch) => {
+      print ("you see a " + characters[ch].name);
+    });
+
     if (rooms[room].items.length > 0) {
       print("You see the following items in the room:");
       rooms[room].items.forEach((item) => {
@@ -65,10 +68,9 @@ const objects = {
     
     }
 
-    const currentRoom = rooms[room];
-   //const exits = [...currentRoom.exits.keys()].join(", ");
-   const exits = Object.keys(currentRoom.exits).join(", ");
-    //const exits = [...rooms[room].exits.keys()].join(", ");
+    //const currentRoom = rooms[room];
+    const exits = Object.keys(rooms[room].exits).join(", ");
+    
     print(`Exits: ${exits}`);
     print ("<br><br> What do you want to do now?");
    } // if room
@@ -78,24 +80,19 @@ const objects = {
     const parts = command.split(" ");
     const action = parts[0];
     const target = parts[1];
-  
+    print (command + "<br>");
     if (!action) {
       printResponse("I don't understand what you want me to do.");
     } else if (action === "look") {
-        if (isRoom (target)) {
+       /* if (isRoom (target)) {
             describeRoom(currentRoom);
         }
-        else {
+        else {*/
             look (target);
-        }
+        //}
     } else if (action === "go") {
        go (target);
-      /*if (newRoom === null) {
-        printResponse("You can't go that way.");
-      } else {
-        currentRoom = newRoom;
-        describeRoom(currentRoom);
-      }*/
+      
     } else if (action == 'take' || action == 'get') {
         take (target);
     }
@@ -120,20 +117,34 @@ function go(direction) {
       currentRoom = exit;
       describeRoom(currentRoom);
     } else {
-      console.log("You can't go that way.");
+      print("You can't go that way.");
     }
   }
   
   // Look at an object or the room
   function look(noun) {
     if (noun) {
-      const item = objects[noun];
-      if (item) {
-        print(item.description + "<br>");
-      } else {
+      let  obj = objects[noun];
+      if (obj) { // the noun is an item
+        if (rooms[currentRoom].containsItem(noun)) {
+            print(obj.description + "<br>");
+        }
+        else print ("You don't see that here<br>");
+
+      } // item
+      else if ( (obj = characters[noun] ) != undefined) {
+        if (characters[noun].room == currentRoom) {
+            print (characters[noun].description + "<br>");
+        }
+        else print ("You don't see that here<br>");
+       
+      } // noun is a character
+       else {
         print("You don't see that here.<br>");
       }
-    } else {
+    } // if theres a noun
+    
+    else { // no noun just show room 
       showRoom();
     }
   }
@@ -148,6 +159,13 @@ function go(direction) {
     else return false;
   }
 
+  function displayCharacters (room) {
+    characters.forEach((ch) => {
+        if (ch.room == room) {
+          print('You see a ' + ch.name + ' in here.');
+        }
+      });
+  }
   function isRoom (noun) {
     if (rooms[noun] != undefined) return true
     else return false;

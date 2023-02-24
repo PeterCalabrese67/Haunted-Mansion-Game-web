@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Haunted Mansion Game</title>
+  
+  
   <style>
     #output {
       height: 300px;
@@ -50,15 +52,16 @@
     const input = document.getElementById("input");
     const response = document.getElementById("response");
 
-    function print(text) {
-      output.innerHTML += text + "<br>";
-      output.scrollTop = output.scrollHeight;
-    }
+    
+  function print(text) {
+    output.innerHTML += text + "<br>";
+    output.scrollTop = output.scrollHeight;
+  }
 
-    function printResponse (text) {
-        response.innerHTML += text + "<br>";
-        response.scrollTop = input.scrollHeight;
-    }
+  function printResponse (text) {
+      response.innerHTML += text + "<br>";
+      response.scrollTop = input.scrollHeight;
+  }
     function clear() {
       output.innerHTML = "";
     }
@@ -75,8 +78,9 @@
     // Main game code goes here
 
   </script>
+  <script src="rooms.js"></script>
+  <script src="characters.js"></script>
   <script src="game.js"></script>
-
   
 </body>
 </html>
