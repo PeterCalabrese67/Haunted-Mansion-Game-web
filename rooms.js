@@ -16,6 +16,26 @@ class Room  {
         if (this.items.indexOf (item)> -1) return true
         else return false;
    };
+
+   describe () {
+    let output = this.description + "<br>";
+
+    this.characters.forEach ((ch) => {
+      output +="you see a " + ch + "<br>";
+    });
+
+    if (this.items.length > 0) {
+      output += "You see the following items in the room:<br>";
+      this.items.forEach((item) => {
+        output += item + "<br>";
+      });
+    
+    }
+    const exits = Object.keys(this.exits).join(", ");
+    
+    output += (`<br>Exits: ${exits}`);
+    return output;
+   }
 }
 
 const rooms = {

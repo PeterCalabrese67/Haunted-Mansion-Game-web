@@ -1,31 +1,4 @@
 
-/*
-const rooms = {
-    foyer: {
-      description: "You are standing in the foyer of the Haunted Mansion. The room is dimly lit and full of cobwebs. A grand staircase leads up to the second floor, and a hallway leads to the north.",
-      items: ["candlestick"],
-      exits: {
-        north: "hallway"
-      }
-    },
-    hallway: {
-      description: "You are in a long hallway. The walls are lined with portraits of stern-looking men and women. There is a door to the south, and another door to the north.",
-      exits: {
-        south: "foyer",
-        north: "library"
-      },
-      items: []
-    },
-    library: {
-      description: "You are in the library. The room is musty and smells of old books. There are rows of bookshelves lining the walls, and a large desk in the center of the room. On the desk, you see a thick, leather-bound book with strange symbols on the cover.",
-      items: ["book"],
-      exits: {
-        south: "hallway"
-      }
-    },
-   
-  };
-*/
 
   // Define the objects
 const objects = {
@@ -47,35 +20,13 @@ const objects = {
   // Define the current room
   let currentRoom = "foyer";
   
-  // Show the current room
+ 
 
+function describeRoom (room) {
+ print (rooms[room].describe ());
+}
 
-
-  function describeRoom(room) {
-    //console.log(rooms[room].name);
-    if (room){
-    print(rooms[room].description);
-
-    rooms[room].characters.forEach ((ch) => {
-      print ("you see a " + characters[ch].name);
-    });
-
-    if (rooms[room].items.length > 0) {
-      print("You see the following items in the room:");
-      rooms[room].items.forEach((item) => {
-        print(objects[item].name);
-      });
-    
-    }
-
-    //const currentRoom = rooms[room];
-    const exits = Object.keys(rooms[room].exits).join(", ");
-    
-    print(`Exits: ${exits}`);
-    print ("<br><br> What do you want to do now?");
-   } // if room
-  } //describeRoom
-
+ 
   function processCommand(command) {
     const parts = command.split(" ");
     const action = parts[0];
@@ -112,7 +63,8 @@ function go(direction) {
     const exit = rooms[currentRoom].exits[direction];
     if (exit) {
       currentRoom = exit;
-      describeRoom(currentRoom);
+      //describeRoom(currentRoom);
+      print (rooms[currentRoom].describe());
     } else {
       print("You can't go that way.");
     }
@@ -142,34 +94,12 @@ function go(direction) {
     } // if theres a noun
     
     else { // no noun just show room 
-      showRoom();
+      //describeRoom(currentRoom);
+      print (rooms[currentRoom].describe());
     }
   }
   
-  /*function objectIn (item, room) {
-    if (rooms[room].items.indexOf(item) > -1) return true
-    else return false;
-  }
-*/
- /* function isObject (noun) {
-    if (objects.indexOf(noun) > -1) return true
-    else return false;
-  }
-  */
-/*
-  function displayCharacters (room) {
-    characters.forEach((ch) => {
-        if (ch.room == room) {
-          print('You see a ' + ch.name + ' in here.');
-        }
-      });
-  }
-  */
- /* function isRoom (noun) {
-    if (rooms[noun] != undefined) return true
-    else return false;
-  }
-  */
+  
   // Take an object
   function take(noun) {
     if (noun) {
@@ -185,7 +115,7 @@ function go(direction) {
        // rooms[currentRoom].items = rooms[currentRoom].items.splice (index,1);
        delete rooms[currentRoom].items[index];
        print ("ok, you pick up the " + noun + "<br>");
-       describeRoom (currentRoom);
+       //describeRoom (currentRoom);
       }
     }
 }
@@ -202,4 +132,12 @@ function drop (noun) {
         print ("you don't have that.");
     }
 }
-describeRoom (currentRoom);
+
+print (rooms[currentRoom].describe());
+const commandTextbox = document.getElementById("command");
+commandTextbox.addEventListener("keydown", onKeyDown);
+
+function onKeyDown(event) {
+    console.log (event.key);
+    if (event.key == 'Enter') processCommand (commandTextbox.value);
+}

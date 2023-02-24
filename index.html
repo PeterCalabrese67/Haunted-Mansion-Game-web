@@ -9,15 +9,15 @@
     #output {
       height: 300px;
       width: 100%;
-      background-color: black;
-      color: white;
+      background-color: rgb(118, 102, 164);
+      color: black;
       font-family: monospace;
       overflow-y: scroll;
       padding: 10px;
     }
     #response {
         width: 100%;
-        height: 150px;
+        height: 50px;
       font-size: 16px;
       padding: 10px;
       box-sizing: border-box;
@@ -41,10 +41,10 @@
 </head>
 <body>
   <div id="output"></div>
-  <div id="response"></div>
-  <input id="input" type="text">
+  <div id="response"> What do you want to do now?</div>
+  <!--<input id="input" type="text"> -->
   <input type="text" id="command" autofocus>
-  <button onclick="processCommand(command.value.trim());">send</button>
+  <button  onclick="processCommand(command.value.trim());">send</button>
   
 
   <script>
