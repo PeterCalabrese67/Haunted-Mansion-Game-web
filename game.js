@@ -84,22 +84,19 @@ const objects = {
     if (!action) {
       printResponse("I don't understand what you want me to do.");
     } else if (action === "look") {
-       /* if (isRoom (target)) {
-            describeRoom(currentRoom);
-        }
-        else {*/
-            look (target);
-        //}
-    } else if (action === "go") {
+       look (target);
+    } else if (action === "go" || action === "walk") {
        go (target);
-      
     } else if (action == 'take' || action == 'get') {
         take (target);
+    }
+    else if (action == 'drop') {
+        drop (target);
     }
     else if (action == 'inv' || action == 'inventory') {
         print('You are carrying the following:<br>');
         inventory.forEach((item) => {
-            print(item.name);
+            print(item);
           });
     }
     else {
@@ -149,16 +146,17 @@ function go(direction) {
     }
   }
   
-  function objectIn (item, room) {
+  /*function objectIn (item, room) {
     if (rooms[room].items.indexOf(item) > -1) return true
     else return false;
   }
-
-  function isObject (noun) {
+*/
+ /* function isObject (noun) {
     if (objects.indexOf(noun) > -1) return true
     else return false;
   }
-
+  */
+/*
   function displayCharacters (room) {
     characters.forEach((ch) => {
         if (ch.room == room) {
@@ -166,21 +164,23 @@ function go(direction) {
         }
       });
   }
-  function isRoom (noun) {
+  */
+ /* function isRoom (noun) {
     if (rooms[noun] != undefined) return true
     else return false;
   }
+  */
   // Take an object
   function take(noun) {
     if (noun) {
       const item = objects[noun];
-      if (!objectIn (noun,currentRoom)) {
+      if (!rooms[currentRoom].containsItem(noun) ) {
         printResponse (" I don't see a " + noun + " here.");
         return;
       }
 
       if (item && item.canPickUp) {
-        inventory.push(item);
+        inventory.push(item.name);
         const index = rooms[currentRoom].items.indexOf(item.name);
        // rooms[currentRoom].items = rooms[currentRoom].items.splice (index,1);
        delete rooms[currentRoom].items[index];
@@ -190,4 +190,16 @@ function go(direction) {
     }
 }
 
+function drop (noun) {
+    const item = objects[noun];
+    if (item && inventory.indexOf(item.name) > -1) {
+        inventory.pop (item.name);
+        rooms[currentRoom].items.push (item.name);
+        print ("ok, you dropped the " + item.name);
+
+    }
+    else {
+        print ("you don't have that.");
+    }
+}
 describeRoom (currentRoom);
