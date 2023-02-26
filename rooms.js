@@ -62,7 +62,19 @@ const rooms = {
                     items: ["book"],
                     characters: [],
                     exits: {
-                      south: "hallway"
+                      south: "hallway",
+                      north: "conservatory"
+                    }}),
+    Conservatory: new Room ({
+                    name: "conservatory",
+                    description: "You are in the conservatory. There is a coffin in the middle of the room and dead flowers all around.",
+                    items: [],
+                    characters: [],
+                    exits: {
+                       south: "library" 
                     }
-    }),
+                  }),
+
+    
+    
 };

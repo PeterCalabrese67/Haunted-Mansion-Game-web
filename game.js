@@ -19,7 +19,7 @@ const objects = {
   
   // Define the current room
   let currentRoom = "foyer";
-  
+  let roamingGhost = 'poltergeist';
  
 
 function describeRoom (room) {
@@ -137,7 +137,9 @@ function moveGhost () {
     let possibleRooms = Object.keys (rooms);
     let rm = Math.floor(Math.random() * possibleRooms.length);
     console.log ("move ghost to " + possibleRooms[rm]);
-    
+    rooms [possibleRooms[rm]].characters.push(roamingGhost);
+    characters[roamingGhost] = possibleRooms[rm];
+
     setTimeout ( moveGhost , 15000);
 }
 
