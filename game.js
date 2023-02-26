@@ -133,11 +133,20 @@ function drop (noun) {
     }
 }
 
+function moveGhost () {
+    let possibleRooms = Object.keys (rooms);
+    let rm = Math.floor(Math.random() * possibleRooms.length);
+    console.log ("move ghost to " + possibleRooms[rm]);
+    
+    setTimeout ( moveGhost , 15000);
+}
+
+
+
 print (rooms[currentRoom].describe());
 const commandTextbox = document.getElementById("command");
-commandTextbox.addEventListener("keydown", onKeyDown);
-
-function onKeyDown(event) {
-    console.log (event.key);
+commandTextbox.addEventListener("keydown", function (event){
     if (event.key == 'Enter') processCommand (commandTextbox.value);
-}
+});
+setTimeout (moveGhost  , 15000);
+

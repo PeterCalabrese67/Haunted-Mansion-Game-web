@@ -37,9 +37,9 @@ class Room  {
     return output;
    }
 }
-
 const rooms = {
-    foyer: new Room ({name: 'foyer',
+    foyer: new Room ({
+                  name: 'foyer',
                   description: "You are standing in the foyer of the Haunted Mansion. The room is dimly lit and full of cobwebs. A grand staircase leads up to the second floor, and a hallway leads to the north.",
                   items: ["candlestick"],
                   characters: ['ghost'],
@@ -47,19 +47,22 @@ const rooms = {
                     north: "hallway"
                   }}),
     hallway: new Room ({
+                    name: "hallway",
                     description: "You are in a long hallway. The walls are lined with portraits of stern-looking men and women. There is a door to the south, and another door to the north.",
                     exits: {
                       south: "foyer",
                       north: "library"
                     },
-                    items: []
+                    items: [],
+                    characters: ['poltergeist']
                   }),
-
     library: new Room ({
-      description: "You are in the library. The room is musty and smells of old books. There are rows of bookshelves lining the walls, and a large desk in the center of the room. On the desk, you see a thick, leather-bound book with strange symbols on the cover.",
-      items: ["book"],
-      exits: {
-        south: "hallway"
-      }
+                    name: "library",
+                    description: "You are in the library. The room is musty and smells of old books. There are rows of bookshelves lining the walls, and a large desk in the center of the room. On the desk, you see a thick, leather-bound book with strange symbols on the cover.",
+                    items: ["book"],
+                    characters: [],
+                    exits: {
+                      south: "hallway"
+                    }
     }),
-}
+};
