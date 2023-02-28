@@ -37,10 +37,11 @@ class Room  {
     return output;
    }
 }
+
 const rooms = {
     foyer: new Room ({
                   name: 'foyer',
-                  description: "You are standing in the foyer of the Haunted Mansion. The room is dimly lit and full of cobwebs. A grand staircase leads up to the second floor, and a hallway leads to the north.",
+                  description: "You are standing in the foyer of the Haunted Mansion. The room is dimly lit and full of cobwebs. A picture of a young man hangs over a fireplace. A door leads to the west.",
                   items: ["candlestick"],
                   characters: ['ghost'],
                   exits: {
