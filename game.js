@@ -1,19 +1,6 @@
 
 
-  // Define the objects
-const objects = {
-    candlestick: {
-      name: "candlestick",
-      description: "An old, rusty candlestick. It looks like it hasn't been used in years.",
-      canPickUp: true
-    },
-    book: {
-      name: "book",
-      description: "A thick, leather-bound book with strange symbols on the cover. It's written in a language you don't recognize.",
-      canPickUp: true
-    }
-  };
-  
+ 
   // Define the player's inventory
   const inventory = [];
   
@@ -77,6 +64,10 @@ function go(direction) {
       if (obj) { // the noun is an item
         if (rooms[currentRoom].containsItem(noun)) {
             print(obj.description + "<br>");
+            if (obj.image) {
+                var img = document.getElementById('image');
+                img.src = obj.image;
+            }
         }
         else print ("You don't see that here<br>");
 
@@ -137,8 +128,9 @@ function moveGhost () {
     let possibleRooms = Object.keys (rooms);
     let rm = Math.floor(Math.random() * possibleRooms.length);
     console.log ("move ghost to " + possibleRooms[rm]);
+    rooms[characters[roamingGhost].room].characters.pop (roamingGhost)
     rooms [possibleRooms[rm]].characters.push(roamingGhost);
-    characters[roamingGhost] = possibleRooms[rm];
+    characters[roamingGhost].room = possibleRooms[rm];
 
     setTimeout ( moveGhost , 15000);
 }

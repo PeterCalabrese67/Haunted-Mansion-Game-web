@@ -45,7 +45,8 @@ const rooms = {
                   items: ["candlestick"],
                   characters: ['ghost'],
                   exits: {
-                    north: "hallway"
+                    north: "hallway",
+                    west: "stretchingRoom"
                   }}),
     hallway: new Room ({
                     name: "hallway",
@@ -66,7 +67,7 @@ const rooms = {
                       south: "hallway",
                       north: "conservatory"
                     }}),
-    Conservatory: new Room ({
+    conservatory: new Room ({
                     name: "conservatory",
                     description: "You are in the conservatory. There is a coffin in the middle of the room and dead flowers all around.",
                     items: [],
@@ -75,6 +76,16 @@ const rooms = {
                        south: "library" 
                     }
                   }),
+
+    stretchingRoom: new Room ({
+                    name: 'stretchingRoom',
+                    description: "You are in a octogon shaped room with four pictures of nicely dressed men and women high on each wall. You see no windows and no doors.",
+                    items: ["portrait1","portrait2", "portrait3","portrait4"],
+                    characters: [],
+                    exits: {
+                      
+                    }}),
+                
 
     
     
