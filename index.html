@@ -3,24 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <title>Haunted Mansion Game</title>
+  
+  
   <style>
     #output {
       height: 300px;
       width: 100%;
-      background-color: black;
-      color: white;
+      background-color: rgb(118, 102, 164);
+      color: black;
       font-family: monospace;
       overflow-y: scroll;
       padding: 10px;
     }
+    /*#image {
+        height: 150px;
+        width: 100%
+    }*/
     #response {
         width: 100%;
-        height: 150px;
+        height: 50px;
       font-size: 16px;
       padding: 10px;
       box-sizing: border-box;
       border:0cqb;
-      background-color: rgb(251, 255, 0);
+      background-color: rgb(188, 189, 138);
     }
 
     #input {
@@ -38,11 +44,13 @@
   </style>
 </head>
 <body>
+    <img id="image" src="images/The_Haunted_Mansion.jpg" >
   <div id="output"></div>
-  <div id="response"></div>
-  <input id="input" type="text">
+  
+  <div id="response"> What do you want to do now?</div>
+  <!--<input id="input" type="text"> -->
   <input type="text" id="command" autofocus>
-  <button onclick="processCommand(command.value.trim());">send</button>
+  <button  onclick="processCommand(command.value.trim());">send</button>
   
 
   <script>
@@ -50,15 +58,16 @@
     const input = document.getElementById("input");
     const response = document.getElementById("response");
 
-    function print(text) {
-      output.innerHTML += text + "<br>";
-      output.scrollTop = output.scrollHeight;
-    }
+    
+  function print(text) {
+    output.innerHTML += text + "<br>";
+    output.scrollTop = output.scrollHeight;
+  }
 
-    function printResponse (text) {
-        response.innerHTML += text + "<br>";
-        response.scrollTop = input.scrollHeight;
-    }
+  function printResponse (text) {
+      response.innerHTML += text + "<br>";
+      response.scrollTop = input.scrollHeight;
+  }
     function clear() {
       output.innerHTML = "";
     }
@@ -75,8 +84,10 @@
     // Main game code goes here
 
   </script>
+  <script src="rooms.js"></script>
+  <script src="characters.js"></script>
+  <script src="objects.js"></script>
   <script src="game.js"></script>
-
   
 </body>
 </html>
