@@ -1,5 +1,18 @@
+let strechLevel = [
+    "Something strange is happening...",
+    "The pictures seem to be more life-like..",
+    "the walls seem odd...",
+    "The pictures seem to be growing...",
+    "Is this haunted room actually stretching?",
+    "Or is it your imagination?",
+    "This chamber has no windows and no doors...",
+    "Which offers you a chilling challenge...",
+    "To find a way out!",
+    "Of course, there's always MY way...",
+    "The lights go out and a ghost drops down from the rafters!"
+];
 
-
+let _StretchCount=0;
  
   // Define the player's inventory
   const inventory = [];
@@ -18,6 +31,10 @@ function describeRoom (room) {
     const parts = command.split(" ");
     const action = parts[0];
     const target = parts[1];
+    if (currentRoom == 'stretchingRoom') {
+        print ("<br>" +strechLevel[_StretchCount]);
+        _StretchCount++;
+    }
     print (command + "<br>");
     if (!action) {
       printResponse("I don't understand what you want me to do.");

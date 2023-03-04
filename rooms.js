@@ -10,6 +10,7 @@ class Room  {
        if (x.items) this.items = x.items;
        if (x.exits) this.exits = x.exits;
        if (x.characters) this.characters = x.characters;
+       
     };
 
     containsItem (item) {
@@ -81,6 +82,7 @@ const rooms = {
                     name: 'stretchingRoom',
                     description: "You are in a octogon shaped room with four pictures of nicely dressed men and women high on each wall. You see no windows and no doors.",
                     items: ["portrait1","portrait2", "portrait3","portrait4"],
+                    
                     characters: [],
                     exits: {
                       
