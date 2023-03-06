@@ -1,8 +1,17 @@
-let strechLevel = [
+let stretchLevel = [
     "Something strange is happening...",
     "The pictures seem to be more life-like..",
     "the walls seem odd...",
     "The pictures seem to be growing...",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
     "Is this haunted room actually stretching?",
     "Or is it your imagination?",
     "This chamber has no windows and no doors...",
@@ -32,8 +41,17 @@ function describeRoom (room) {
     const action = parts[0];
     const target = parts[1];
     if (currentRoom == 'stretchingRoom') {
-        print ("<br>" +strechLevel[_StretchCount]);
+        print ("<br>" +stretchLevel[_StretchCount]);
         _StretchCount++;
+        if (_StretchCount == 2){
+          objects['portrait1'].image = 'images/port1.png';
+          objects['portrait2'].image = 'images/port2.png';
+          objects['portrait3'].image = 'images/port3.png';
+          objects['portrait4'].image = 'images/port4.png';
+        }
+        if (_StretchCount == stretchLevel.length) {
+           gameOver ("The ghost jumps down and grabs you. You are now a resident of the haunted Mansion");
+        }
     }
     print (command + "<br>");
     if (!action) {
@@ -110,32 +128,55 @@ function go(direction) {
   
   // Take an object
   function take(noun) {
-    if (noun) {
-      const item = objects[noun];
-      if (!rooms[currentRoom].containsItem(noun) ) {
+    if (!noun) {
+      print ("you need to tell me what you want to take.");
+      return ;
+    }
+    
+    const item = objects[noun];
+    if (!rooms[currentRoom].containsItem(noun) ) {
         printResponse (" I don't see a " + noun + " here.");
         return;
-      }
+    }
 
-      if (item && item.canPickUp) {
+    if (item ) {
+      let success = true;
+      if (item.canPickUp == false) {
+        print (item.negativeMessage);
+        return;
+      }
+      if (item.take){
+        success = item.take ();
+        
+      }
+      if (success) {
         inventory.push(item.name);
         const index = rooms[currentRoom].items.indexOf(item.name);
-       // rooms[currentRoom].items = rooms[currentRoom].items.splice (index,1);
-       delete rooms[currentRoom].items[index];
-       print ("ok, you pick up the " + noun + "<br>");
-       //describeRoom (currentRoom);
+        // rooms[currentRoom].items = rooms[currentRoom].items.splice (index,1);
+        delete rooms[currentRoom].items[index];
+        print ("ok, you pick up the " + noun + "<br>");
+        //describeRoom (currentRoom);
       }
     }
-}
 
+   
+    
+}
+6
 function drop (noun) {
     const item = objects[noun];
     if (item && inventory.indexOf(item.name) > -1) {
+      if (item.drop) {
+        item.drop ();
+      }
+     
+      else {
         inventory.pop (item.name);
         rooms[currentRoom].items.push (item.name);
         print ("ok, you dropped the " + item.name);
 
     }
+  }
     else {
         print ("you don't have that.");
     }
@@ -161,3 +202,7 @@ commandTextbox.addEventListener("keydown", function (event){
 });
 setTimeout (moveGhost  , 15000);
 
+function gameOver (message){
+  print (message);
+
+}

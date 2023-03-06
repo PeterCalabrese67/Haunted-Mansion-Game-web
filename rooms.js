@@ -43,7 +43,7 @@ const rooms = {
     foyer: new Room ({
                   name: 'foyer',
                   description: "You are standing in the foyer of the Haunted Mansion. The room is dimly lit and full of cobwebs. A picture of a young man hangs over a fireplace. A door leads to the west.",
-                  items: ["candlestick"],
+                  items: ["steak"],
                   characters: ['ghost'],
                   exits: {
                     north: "hallway",
@@ -56,7 +56,8 @@ const rooms = {
                       south: "foyer",
                       north: "library"
                     },
-                    items: [],
+                    items: ["candlestick"],
+                    
                     characters: ['poltergeist']
                   }),
     library: new Room ({
